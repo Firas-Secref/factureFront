@@ -15,7 +15,7 @@ export class ManageFactureComponent implements OnInit {
   visible!: boolean
   allFacture: any[] = [];
   helper = new JwtHelperService()
-
+  isAdmin = localStorage.getItem("role")==="ROLE_ADMIN";
   constructor(private factureService: FactureService, private messageService: MessageService, private dialogService: DialogService){}
 
   status: any[] = [

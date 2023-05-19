@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class SidenavComponent {
 
+  isAdmin = localStorage.getItem("role")==="ROLE_ADMIN";
+
   constructor(private router: Router){}
 
   navigateToUsers(){

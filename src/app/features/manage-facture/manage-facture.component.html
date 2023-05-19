@@ -32,7 +32,7 @@
         <div class="col col-3" style="text-align: center;">
           <i *ngIf="fact.status != 'PENDING'" class="pi pi-check" style="font-size: 1.5rem; color: rgb(65, 170, 65);"></i>
           <i *ngIf="fact.status == 'PENDING'" class="pi pi-times" style="font-size: 1.5rem; color: rgb(175, 56, 56);"></i>
-          <i (click)="paid(fact.id)" *ngIf="fact.status == 'PENDING'" class="pi pi-money-bill" style="font-size: 1.5rem; color: rgb(56, 58, 175); margin-left: 2rem;"></i>
+          <i (click)="paid(fact.id)" *ngIf="fact.status == 'PENDING' && isAdmin" class="pi pi-money-bill" style="font-size: 1.5rem; color: rgb(56, 58, 175); margin-left: 2rem;"></i>
           
         </div>
         <!-- <div class="col col-2" style="text-align: center;margin-top: -1rem;" >

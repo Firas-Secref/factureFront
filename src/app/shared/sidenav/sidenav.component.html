@@ -8,16 +8,16 @@
   
   
   
-      <button class="btn" (click)="navigateToUsers()">
+      <button *ngIf="isAdmin" class="btn" (click)="navigateToUsers()">
         <img src="assets/sideBar/Groupe%2010768.png" style="width: 28px" /><span>Admin board</span>
       </button>
   
-      <button class="btn"  (click)="navigateToApplications()">
+      <button *ngIf="isAdmin" class="btn"  (click)="navigateToApplications()">
         <img src="assets/sideBar/Groupe%2010769.png" style="width: 28px" /><span>Applications</span>
       </button>
       
   
-      <button class="btn" (click)="navigateToStructure()">
+      <button *ngIf="isAdmin" class="btn" (click)="navigateToStructure()">
         <img src="assets/sideBar/Groupe%2010780.png" style="width: 28px" /><span>Structures</span>
       </button>
 
