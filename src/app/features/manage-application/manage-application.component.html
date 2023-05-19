@@ -7,10 +7,10 @@
     <button mat-raised-button class="addBtnColor" (click)="openDialog()">+ New Application</button>
   </div>
   
-  <p-scrollPanel [style]="{ width: '100%', height: '50%' }">
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; margin-bottom: 100px">
+  <p-scrollPanel [style]="{ width: '100%', height: '80%' }">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin-bottom: 100px; width: 90vw; ">
   
-      <div *ngFor="let app of applications" class="candidateList">
+      <div *ngFor="let app of applications" class="candidateList" style="margin-left: 5rem;">
   
         <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 40vw">
           <div style="margin-left: 2rem; margin-top: 1rem; width: 12rem">
@@ -20,15 +20,15 @@
               </div>
   
             </div>
-            <div style="color: #3a6aa1; font-weight: bolder; width: 20vw; padding-right: 1rem">{{app.code}}</div>
-            <div style="color: #4e5652; width: 20vw; padding-right: 1rem; margin-top: 12px;">{{app.libelle}}</div>
+            <div style="color: #3a6aa1; font-weight: bolder; width: 20vw; padding-right: 1rem">{{app?.code}}</div>
+            <div style="color: #4e5652; width: 20vw; padding-right: 1rem; margin-top: 12px;">{{app?.libelle}}</div>
             <div style="display: flex; justify-content: space-between; align-items: flex-end;height: 4rem; ">
               <div style="display: flex; justify-content: flex-start;">
-                <p-button (click)="openUpdateDialog(app)" style="margin-right: 7px;" icon="pi pi-pencil" styleClass="p-button-rounded p-button-warning p-button-text p-button-raised"></p-button>
-                <p-button (click)="deleteApp(app)" icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"></p-button>
+                <p-button (click)="openUpdateDialog(app)"  icon="pi pi-pencil" styleClass="p-button-rounded p-button-warning p-button-text p-button-raised"></p-button>
+                <p-button (click)="openDeleteDialog(app.id)" icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text p-button-raised"></p-button>
 
               </div>
-                <p style="margin-right: -5rem;">{{app.prix}} <span style="font-weight: bolder;">$</span></p>
+                <p style="margin-right: -5rem;">{{app?.prix}} <span style="font-weight: bolder;">$</span></p>
             </div>
           </div>
         </div>
@@ -95,5 +95,13 @@
     <ng-template pTemplate="footer">
       <button pButton icon="pi pi-times" (click)="visible = false"  class="p-button-danger" label="Cancel"></button>
       <button pButton icon="pi pi-check" (click)="updateApp()" label="Submit" ></button>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog [(visible)]="delete" header="Confirm Delete" [style]="{width: '40vw', height: '30vh'}">
+    <div> are you sure you want to delete this application !?</div>
+    <ng-template pTemplate="footer">
+      <button pButton  class="p-button-danger" label="Cancel"></button>
+      <button (click) = "deleteApp()" pButton label="delete" ></button>
     </ng-template>
   </p-dialog>

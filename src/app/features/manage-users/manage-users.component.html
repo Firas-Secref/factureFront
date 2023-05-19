@@ -27,7 +27,7 @@
       </mat-list>
       <p class="marginItemsListe">{{user.email}}</p>
       <p class="marginItemsListe">{{user.roles[0].name}}</p>
-      <button (click)="deleteUser(user.username)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger marginItemsListe" style="font-size: 12rem; margin-top: 1.2rem;"></button>
+      <button (click)="openDeleteDialog(user.username)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger marginItemsListe" style="font-size: 12rem; margin-top: 1.2rem;"></button>
       <button (click)="openUpdateDialog(user)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning marginItemsListe" style="font-size: 12rem; margin-top: 1.2rem;"></button>
 
     </div>
@@ -122,5 +122,14 @@
   <ng-template pTemplate="footer">
     <button (click)="update = false" pButton pRipple type="button" icon="pi pi-times" label="Cancel" class="p-button-danger"></button>
     <p-button (click)="updateUser()" icon="pi pi-check" label="Submit" class="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="delete" header="Confirm Delete" [style]="{width: '40vw', height: '30vh'}">
+  <div> are you sure you want to delete this user !?</div>
+  <ng-template pTemplate="footer">
+    <button pButton  class="p-button-danger" label="Cancel"></button>
+    <button (click) = "deleteUser()" pButton label="delete" ></button>
   </ng-template>
 </p-dialog>

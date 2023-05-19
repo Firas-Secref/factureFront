@@ -31,13 +31,15 @@ import { CalendarModule } from 'primeng/calendar';
 import { MessagesModule } from 'primeng/messages';
 import {ToastModule} from 'primeng/toast';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 
 @NgModule({
   declarations: [
     SidenavComponent,
-    NavbarComponent, TwoFirstLettersPipe, ApplicationPopupComponent, MessagePopupComponent
+    NavbarComponent, TwoFirstLettersPipe, ApplicationPopupComponent, MessagePopupComponent, ConfirmComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
     CalendarModule,
     MessagesModule,
     ToastModule,
+    MatDialogModule
   ], 
   exports: [
     CommonModule,
@@ -97,6 +100,7 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
     CalendarModule,
     MessagesModule,
     ToastModule,
+    MatDialogModule
   ], 
   providers: [
     DialogService,

@@ -15,6 +15,8 @@ export class ManageStructureComponent implements OnInit {
   structureList: any[] = [];
   structureForm!: FormGroup;
   structureUpdateForm!: FormGroup
+  delete!: boolean;
+  structId!: number;
   constructor(private fb: FormBuilder, private structureService: StructureService){}
 
   ngOnInit(): void {
@@ -91,15 +93,17 @@ export class ManageStructureComponent implements OnInit {
     
   }
 
-  deleteStructure(structId: number){
-   if(confirm("are you surethat you want to delete this structure!?'")){
-    this.structureService.deleteStructure(structId).subscribe((data: any)=>{
+  opendeleteDialog(structId: number){
+    this.delete= true
+    this.structId = structId;
+   
+  }
+
+  deleteStructure(){
+    this.structureService.deleteStructure(this.structId).subscribe((data: any)=>{
       console.log(data);
       this.getAllStructure();
-      
+      this.delete = false
     })
-   }
-    
-
   }
 }

@@ -17,6 +17,8 @@ export class ManageUsersComponent implements OnInit {
   update!: boolean;
   roles: any[] = [];
   allUsers: any[] = []
+  delete!: boolean
+  username!: string
   constructor(
     private fb: FormBuilder,
     private roleService: RoleService,
@@ -95,14 +97,19 @@ export class ManageUsersComponent implements OnInit {
     })
   }
 
-  deleteUser(username: string){
-    if(confirm("delete this user !?")){
-      this.userService.deleteUser(username).subscribe((data: any)=>{
-        this.getAllUsers();
-        console.log(data);
-      })
-    }
+  openDeleteDialog(username: string){
+    this.delete= true;
+    this.username = username;
     
+    
+  }
+
+  deleteUser(){
+    this.userService.deleteUser(this.username).subscribe((data: any)=>{
+      this.getAllUsers();
+      console.log(data);
+      this.delete= false
+    })
   }
 
 }

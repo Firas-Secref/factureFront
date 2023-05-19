@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplicationService } from '../services/application.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DialogService } from 'primeng/dynamicdialog';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-manage-application',
@@ -13,13 +15,14 @@ export class ManageApplicationComponent implements OnInit {
 
   visible!: boolean;
   update!: boolean
+  delete!: boolean
   applicationForm!: FormGroup;
   applicationUpdateForm!: FormGroup
   applications: any[] = [];
   termToFind: string = ""
   helper = new JwtHelperService()
   appId!: number;
-  constructor(private fb: FormBuilder, private applicationService: ApplicationService, private dialogService: DialogService){}
+  constructor(private dialog: MatDialog, private fb: FormBuilder, private applicationService: ApplicationService, private dialogService: DialogService){}
 
   ngOnInit(): void {
     const jwt = localStorage.getItem("jwt")!;
@@ -35,6 +38,11 @@ export class ManageApplicationComponent implements OnInit {
 
   openDialog(){
     this.visible = true;
+  }
+
+  openDeleteDialog(appId: number){
+    this.appId = appId
+    this.delete = true;
   }
 
   initForm(){
@@ -100,16 +108,17 @@ export class ManageApplicationComponent implements OnInit {
     
   }
 
-  deleteApp(app: any){
+  deleteApp(){
     if(localStorage.getItem("role")==="ROLE_USER"){
       return;
     }else if(localStorage.getItem("role")==="ROLE_ADMIN"){
-      if(confirm("Supprimer cette application?!")){
-        this.applicationService.deleteApplication(app.id).subscribe((data: any)=>{
+      
+        this.applicationService.deleteApplication(this.appId).subscribe((data: any)=>{
           console.log(data);
           this.getAllApplications()
+          this.update = false
         })
-      }
+      
     }
     
   }
